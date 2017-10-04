@@ -12,6 +12,7 @@ class App extends Component {
       filedata: ''
     };
   }
+
   componentWillMount() {
       let filepath = "/home/baldvegeta/Desktop/hello/FileEntity.js";
 
@@ -20,7 +21,6 @@ class App extends Component {
           .then(filedata => this.setState(filedata));
   }
   render() {
-    console.log(this.state.filedata);
 
     return (
       <div>
