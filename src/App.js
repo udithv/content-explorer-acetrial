@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+
+//SubComponents 
+import ContentExplorer from './components/ContentExplorer';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      filedata: ''
+    };
+  }
+  componentWillMount() {
+      let filepath = "/home/baldvegeta/Desktop/hello/FileEntity.js";
+
+      axios.post("http://localhost:4040/filedata",{ filepath })
+          .then((res) => res.data)
+          .then(filedata => this.setState(filedata));
+  }
   render() {
+    console.log(this.state.filedata);
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+          <ContentExplorer filedata={this.state.filedata} />
       </div>
     );
   }
